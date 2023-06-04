@@ -24,15 +24,15 @@ def pregunta_01():
 
 def pregunta_02():
     nombre_archivo = "data.csv"
-  registros_por_letra = { }
-  with open(nombre_archivo, "r") as archivo:
-    for linea in archivo:
-      letra = linea[0]
-      if letra not in registros_por_letra:
+    registros_por_letra = { }
+    with open(nombre_archivo, "r") as archivo:
+      for linea in archivo:
+        letra = linea[0]
+        if letra not in registros_por_letra:
           registros_por_letra[letra] = 0
       registros_por_letra[letra] += 1
-  lista_tuplas = sorted([(letra, cantidad) for letra, cantidad in registros_por_letra.items()])
-  return lista_tuplas
+    lista_tuplas = sorted([(letra, cantidad) for letra, cantidad in registros_por_letra.items()])
+    return lista_tuplas
 
 
 def pregunta_03():
@@ -52,46 +52,46 @@ def pregunta_03():
 
 def pregunta_04():
     nombre_archivo = "data.csv"
-  meses = {}
-  archivo = open(nombre_archivo, 'r')
-  registros = archivo.readlines()
+    meses = {}
+    archivo = open(nombre_archivo, 'r')
+    registros = archivo.readlines()
 
-  for registro in registros:
-    datos = registro.strip().split('\t')
-    fecha=datos[2]
-    mes = fecha.split('-')[1]
-    if mes not in meses:
-        meses[mes] = 1
-    else:
-        meses[mes] += 1
+    for registro in registros:
+        datos = registro.strip().split('\t')
+        fecha=datos[2]
+        mes = fecha.split('-')[1]
+        if mes not in meses:
+            meses[mes] = 1
+        else:
+            meses[mes] += 1
 
-  lista_meses= sorted([(mes, cantidad) for mes, cantidad in meses.items()])
-  return lista_meses
+    lista_meses= sorted([(mes, cantidad) for mes, cantidad in meses.items()])
+    return lista_meses
 
 
 def pregunta_05():
     nombre_archivo = "data.csv"
-  archivo = open(nombre_archivo, 'r')
-  registros = archivo.readlines()
+    archivo = open(nombre_archivo, 'r')
+    registros = archivo.readlines()
 
-  max_min_valores = {}
-  for registro in registros:
-    datos = registro.strip().split('\t')
-    letra = datos[0]
-    valor = int(datos[1])
-    if letra not in max_min_valores:
-        max_min_valores[letra] = (valor, valor)
-    else:
-        max_val, min_val = max_min_valores[letra]
-        max_val = max(max_val, valor)
-        min_val = min(min_val, valor)
-        max_min_valores[letra] = (max_val, min_val)
+    max_min_valores = {}
+    for registro in registros:
+        datos = registro.strip().split('\t')
+        letra = datos[0]
+        valor = int(datos[1])
+        if letra not in max_min_valores:
+            max_min_valores[letra] = (valor, valor)
+        else:
+            max_val, min_val = max_min_valores[letra]
+            max_val = max(max_val, valor)
+            min_val = min(min_val, valor)
+            max_min_valores[letra] = (max_val, min_val)
 
-  resultado = []
-  for letra, (max_val, min_val) in max_min_valores.items():
-    resultado.append((letra, max_val, min_val))
-  resultado=sorted(resultado )
-  return resultado
+    resultado = []
+    for letra, (max_val, min_val) in max_min_valores.items():
+        resultado.append((letra, max_val, min_val))
+    resultado=sorted(resultado )
+    return resultado
 
 
 def pregunta_06():
