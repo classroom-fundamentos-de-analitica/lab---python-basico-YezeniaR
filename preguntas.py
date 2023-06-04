@@ -11,9 +11,10 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 
 
-def pregunta_01(data):
+def pregunta_01():
+    nombre_archivo = "data.csv"
     suma = 0
-    with open(data, 'r') as archivo:
+    with open(nombre_archivo, 'r') as archivo:
         for linea in archivo:
             columnas = linea.strip().split()
             if len(columnas) > 1:
@@ -21,9 +22,10 @@ def pregunta_01(data):
     return suma
 
 
-def pregunta_02(data):
+def pregunta_02():
+    nombre_archivo = "data.csv"
   registros_por_letra = { }
-  with open(data, "r") as archivo:
+  with open(nombre_archivo, "r") as archivo:
     for linea in archivo:
       letra = linea[0]
       if letra not in registros_por_letra:
@@ -33,9 +35,10 @@ def pregunta_02(data):
   return lista_tuplas
 
 
-def pregunta_03(data):
+def pregunta_03():
+    nombre_archivo = "data.csv"
     sumas = {}
-    with open(data, 'r') as archivo:
+    with open(nombre_archivo, 'r') as archivo:
         for linea in archivo:
             valores = linea.strip().split()
             letra, valor = valores[0], int(valores[1])
@@ -47,9 +50,10 @@ def pregunta_03(data):
     return resultado
 
 
-def pregunta_04(data):
+def pregunta_04():
+    nombre_archivo = "data.csv"
   meses = {}
-  archivo = open('data.csv', 'r')
+  archivo = open(nombre_archivo, 'r')
   registros = archivo.readlines()
 
   for registro in registros:
@@ -65,8 +69,9 @@ def pregunta_04(data):
   return lista_meses
 
 
-def pregunta_05(data):
-  archivo = open('data.csv', 'r')
+def pregunta_05():
+    nombre_archivo = "data.csv"
+  archivo = open(nombre_archivo, 'r')
   registros = archivo.readlines()
 
   max_min_valores = {}
