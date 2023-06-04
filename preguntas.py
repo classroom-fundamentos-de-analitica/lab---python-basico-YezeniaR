@@ -13,9 +13,9 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 
 
-def pregunta_01(data.csv):
+def pregunta_01(data):
     suma = 0
-    with open(data.csv, 'r') as archivo:
+    with open(data, 'r') as archivo:
         for linea in archivo:
             columnas = linea.strip().split()
             if len(columnas) > 1:
