@@ -8,8 +8,6 @@ No puede utilizar pandas, numpy o scipy. Se debe utilizar solo las funciones de 
 básicas.
 
 Utilice el archivo `data.csv` para resolver las preguntas.
-
-
 """
 
 
@@ -23,83 +21,72 @@ def pregunta_01(data):
     return suma
 
 
-def pregunta_02():
-    """
-    Retorne la cantidad de registros por cada letra de la primera columna como la lista
-    de tuplas (letra, cantidad), ordendas alfabéticamente.
-
-    Rta/
-    [
-        ("A", 8),
-        ("B", 7),
-        ("C", 5),
-        ("D", 6),
-        ("E", 14),
-    ]
-
-    """
-    return
+def pregunta_02(data):
+  registros_por_letra = { }
+  with open(data, "r") as archivo:
+    for linea in archivo:
+      letra = linea[0]
+      if letra not in registros_por_letra:
+          registros_por_letra[letra] = 0
+      registros_por_letra[letra] += 1
+  lista_tuplas = sorted([(letra, cantidad) for letra, cantidad in registros_por_letra.items()])
+  return lista_tuplas
 
 
-def pregunta_03():
-    """
-    Retorne la suma de la columna 2 por cada letra de la primera columna como una lista
-    de tuplas (letra, suma) ordendas alfabeticamente.
-
-    Rta/
-    [
-        ("A", 53),
-        ("B", 36),
-        ("C", 27),
-        ("D", 31),
-        ("E", 67),
-    ]
-
-    """
-    return
+def pregunta_03(data):
+    sumas = {}
+    with open(data, 'r') as archivo:
+        for linea in archivo:
+            valores = linea.strip().split()
+            letra, valor = valores[0], int(valores[1])
+            if letra in sumas:
+                sumas[letra] += valor
+            else:
+                sumas[letra] = valor
+    resultado = sorted(sumas.items())
+    return resultado
 
 
-def pregunta_04():
-    """
-    La columna 3 contiene una fecha en formato `YYYY-MM-DD`. Retorne la cantidad de
-    registros por cada mes, tal como se muestra a continuación.
+def pregunta_04(data):
+  meses = {}
+  archivo = open('data.csv', 'r')
+  registros = archivo.readlines()
 
-    Rta/
-    [
-        ("01", 3),
-        ("02", 4),
-        ("03", 2),
-        ("04", 4),
-        ("05", 3),
-        ("06", 3),
-        ("07", 5),
-        ("08", 6),
-        ("09", 3),
-        ("10", 2),
-        ("11", 2),
-        ("12", 3),
-    ]
+  for registro in registros:
+    datos = registro.strip().split('\t')
+    fecha=datos[2]
+    mes = fecha.split('-')[1]
+    if mes not in meses:
+        meses[mes] = 1
+    else:
+        meses[mes] += 1
 
-    """
-    return
+  lista_meses= sorted([(mes, cantidad) for mes, cantidad in meses.items()])
+  return lista_meses
 
 
-def pregunta_05():
-    """
-    Retorne una lista de tuplas con el valor maximo y minimo de la columna 2 por cada
-    letra de la columa 1.
+def pregunta_05(data):
+  archivo = open('data.csv', 'r')
+  registros = archivo.readlines()
 
-    Rta/
-    [
-        ("A", 9, 2),
-        ("B", 9, 1),
-        ("C", 9, 0),
-        ("D", 8, 3),
-        ("E", 9, 1),
-    ]
+  max_min_valores = {}
+  for registro in registros:
+    datos = registro.strip().split('\t')
+    letra = datos[0]
+    valor = int(datos[1])
+    if letra not in max_min_valores:
+        max_min_valores[letra] = (valor, valor)
+    else:
+        max_val, min_val = max_min_valores[letra]
+        max_val = max(max_val, valor)
+        min_val = min(min_val, valor)
+        max_min_valores[letra] = (max_val, min_val)
 
-    """
-    return
+  resultado = []
+  for letra, (max_val, min_val) in max_min_valores.items():
+    resultado.append((letra, max_val, min_val))
+  resultado=sorted(resultado )
+  return resultado
 
 
 def pregunta_06():
