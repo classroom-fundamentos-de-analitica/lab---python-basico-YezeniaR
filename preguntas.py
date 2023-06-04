@@ -13,15 +13,14 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 
 
-def pregunta_01():
-    """
-    Retorne la suma de la segunda columna.
-
-    Rta/
-    214
-
-    """
-    return
+def pregunta_01(data.csv:
+    suma = 0
+    with open(data.csv, 'r') as archivo:
+        for linea in archivo:
+            columnas = linea.strip().split()
+            if len(columnas) > 1:
+                suma += int(columnas[1])
+    return suma
 
 
 def pregunta_02():
