@@ -24,13 +24,16 @@ def pregunta_01():
 
 def pregunta_02():
     nombre_archivo = "data.csv"
-    registros_por_letra = { }
+    registros_por_letra = {}
+
     with open(nombre_archivo, "r") as archivo:
-      for linea in archivo:
-        letra = linea[0]
-        if letra not in registros_por_letra:
-          registros_por_letra[letra] = 0
-      registros_por_letra[letra] += 1
+        for linea in archivo:
+            linea = linea.strip()
+            letra = linea[0]
+            if letra not in registros_por_letra:
+                registros_por_letra[letra] = 0
+            registros_por_letra[letra] += 1
+
     lista_tuplas = sorted([(letra, cantidad) for letra, cantidad in registros_por_letra.items()])
     return lista_tuplas
 
