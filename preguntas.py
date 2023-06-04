@@ -13,7 +13,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 
 
-def pregunta_01(data.csv:
+def pregunta_01(data.csv):
     suma = 0
     with open(data.csv, 'r') as archivo:
         for linea in archivo:
