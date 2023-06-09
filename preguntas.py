@@ -98,52 +98,51 @@ def pregunta_05():
 
 
 def pregunta_06():
-    """
-    La columna 5 codifica un diccionario donde cada cadena de tres letras corresponde a
-    una clave y el valor despues del caracter `:` corresponde al valor asociado a la
-    clave. Por cada clave, obtenga el valor asociado mas pequeño y el valor asociado mas
-    grande computados sobre todo el archivo.
+  nombre_archivo = "data.csv"
+  resultados = {}
 
-    Rta/
-    [
-        ("aaa", 1, 9),
-        ("bbb", 1, 9),
-        ("ccc", 1, 10),
-        ("ddd", 0, 9),
-        ("eee", 1, 7),
-        ("fff", 0, 9),
-        ("ggg", 3, 10),
-        ("hhh", 0, 9),
-        ("iii", 0, 9),
-        ("jjj", 5, 17),
-    ]
+  with open(nombre_archivo, 'r') as f:
+        for linea in f:
+            columnas = linea.split()
 
-    """
-    return
+            if len(columnas) >= 5:
+                clave_valor = columnas[4].split(',')
+                
+                for cv in clave_valor:
+                    clave, valor = cv.split(':')
+                    valor = int(valor)
+
+                    if clave in resultados:
+                        min_valor, max_valor = resultados[clave]
+                        resultados[clave] = (min(min_valor, valor), max(max_valor, valor))
+                    else:
+                        resultados[clave] = (valor, valor)
+
+  lista_resultados = sorted([(clave, min_valor, max_valor) for clave, (min_valor, max_valor) in resultados.items()])
+
+  return lista_resultados
 
 
 def pregunta_07():
-    """
-    Retorne una lista de tuplas que asocien las columnas 0 y 1. Cada tupla contiene un
-    valor posible de la columna 2 y una lista con todas las letras asociadas (columna 1)
-    a dicho valor de la columna 2.
+    nombre_archivo = "data.csv"
+    resultados = {}
 
-    Rta/
-    [
-        (0, ["C"]),
-        (1, ["E", "B", "E"]),
-        (2, ["A", "E"]),
-        (3, ["A", "B", "D", "E", "E", "D"]),
-        (4, ["E", "B"]),
-        (5, ["B", "C", "D", "D", "E", "E", "E"]),
-        (6, ["C", "E", "A", "B"]),
-        (7, ["A", "C", "E", "D"]),
-        (8, ["E", "D", "E", "A", "B"]),
-        (9, ["A", "B", "E", "A", "A", "C"]),
-    ]
+    with open(nombre_archivo, 'r') as f:
+        for linea in f:
+            columnas = linea.split('\t')
 
-    """
-    return
+            if len(columnas) >= 5:
+                letras = columnas[0].split(',')
+                valor_columna2 = int(columnas[1])
+
+                if valor_columna2 in resultados:
+                    resultados[valor_columna2].extend(letras)
+                else:
+                    resultados[valor_columna2] = letras
+
+    lista_resultados = sorted([(clave, valores) for clave, valores in resultados.items()])
+
+    return (lista_resultados)
 
 
 def pregunta_08():
