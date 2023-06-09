@@ -146,108 +146,109 @@ def pregunta_07():
 
 
 def pregunta_08():
-    """
-    Genere una lista de tuplas, donde el primer elemento de cada tupla contiene  el valor
-    de la segunda columna; la segunda parte de la tupla es una lista con las letras
-    (ordenadas y sin repetir letra) de la primera  columna que aparecen asociadas a dicho
-    valor de la segunda columna.
+    nombre_archivo = "data.csv"
+    resultados = {}
 
-    Rta/
-    [
-        (0, ["C"]),
-        (1, ["B", "E"]),
-        (2, ["A", "E"]),
-        (3, ["A", "B", "D", "E"]),
-        (4, ["B", "E"]),
-        (5, ["B", "C", "D", "E"]),
-        (6, ["A", "B", "C", "E"]),
-        (7, ["A", "C", "D", "E"]),
-        (8, ["A", "B", "D", "E"]),
-        (9, ["A", "B", "C", "E"]),
-    ]
+    with open(nombre_archivo, 'r') as f:
+        for linea in f:
+            columnas = linea.split()
 
-    """
-    return
+            if len(columnas) >= 2:
+                valor = int(columnas[1])
+                letras = columnas[0].split(',')
+
+                if valor in resultados:
+                    for letra in letras:
+                        resultados[valor].add(letra)
+                else:
+                    resultados[valor] = set(letras)
+
+    lista_resultados = sorted([(valor, sorted(letras)) for valor, letras in resultados.items()])
+
+    return lista_resultados
 
 
 def pregunta_09():
-    """
-    Retorne un diccionario que contenga la cantidad de registros en que aparece cada
-    clave de la columna 5.
+    nombre_archivo = "data.csv"
+    registros = {}
 
-    Rta/
-    {
-        "aaa": 13,
-        "bbb": 16,
-        "ccc": 23,
-        "ddd": 23,
-        "eee": 15,
-        "fff": 20,
-        "ggg": 13,
-        "hhh": 16,
-        "iii": 18,
-        "jjj": 18,
-    }
+    with open(nombre_archivo, 'r') as f:
+        for linea in f:
+            columnas = linea.split()
 
-    """
-    return
+            if len(columnas) >= 5:
+                clave_valor = columnas[4].split(',')
+
+                for cv in clave_valor:
+                    clave, _ = cv.split(':')
+
+                    if clave in registros:
+                        registros[clave] += 1
+                    else:
+                        registros[clave] = 1
+    registros = dict(sorted(registros.items()))
+    return registros
 
 
 def pregunta_10():
-    """
-    Retorne una lista de tuplas contengan por cada tupla, la letra de la columna 1 y la
-    cantidad de elementos de las columnas 4 y 5.
+    nombre_archivo = "data.csv"
+    resultados = []
 
-    Rta/
-    [
-        ("E", 3, 5),
-        ("A", 3, 4),
-        ("B", 4, 4),
-        ...
-        ("C", 4, 3),
-        ("E", 2, 3),
-        ("E", 3, 3),
-    ]
+    with open(nombre_archivo, 'r') as f:
+        for linea in f:
+            columnas = linea.split()
+            
+            if len(columnas) >= 5:
+                letra = columnas[0]
+                cantidad_columna4 = len(columnas[3].split(','))
+                clave_valor = columnas[4].split(',')
+                cantidad_columna5 = len(clave_valor)
 
+                resultados.append((letra, cantidad_columna4, cantidad_columna5))
 
-    """
-    return
+    return resultados
 
 
 def pregunta_11():
-    """
-    Retorne un diccionario que contengan la suma de la columna 2 para cada letra de la
-    columna 4, ordenadas alfabeticamente.
+    nombre_archivo = "data.csv"
+    resultados = {}
 
-    Rta/
-    {
-        "a": 122,
-        "b": 49,
-        "c": 91,
-        "d": 73,
-        "e": 86,
-        "f": 134,
-        "g": 35,
-    }
+    with open(nombre_archivo, 'r') as f:
+        for linea in f:
+            columnas = linea.split()
 
+            if len(columnas) >= 4:
+                letras = columnas[3].split(',')
 
-    """
-    return
+                for letra in letras:
+                    if letra in resultados:
+                        resultados[letra] += int(columnas[1])
+                    else:
+                        resultados[letra] = int(columnas[1])
+
+    resultados_ordenados = dict(sorted(resultados.items()))
+
+    return resultados_ordenados
 
 
 def pregunta_12():
-    """
-    Genere un diccionario que contengan como clave la columna 1 y como valor la suma de
-    los valores de la columna 5 sobre todo el archivo.
+    nombre_archivo = "data.csv"
+    diccionario = {}
 
-    Rta/
-    {
-        'A': 177,
-        'B': 187,
-        'C': 114,
-        'D': 136,
-        'E': 324
-    }
+    with open(nombre_archivo, 'r') as f:
+        for linea in f:
+            columnas = linea.split('\t')
 
-    """
-    return
+            if len(columnas) >= 5:
+                clave = columnas[0]
+                valor_columna5 = columnas[4].strip().split(',')
+
+                for valor in valor_columna5:
+                    clave_valor = valor.split(':')
+                    if len(clave_valor) == 2:
+                        _, valor = clave_valor
+                        diccionario.setdefault(clave, 0)
+                        diccionario[clave] += int(valor)
+
+    resultados_ordenados = dict(sorted(diccionario.items()))
+    return resultados_ordenados
